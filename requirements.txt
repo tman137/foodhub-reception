@@ -1,0 +1,6 @@
+numpy==1.21.5
+plotly==5.5.0
+pygame==2.0.1
+python-statemachine==0.8.0
+six==1.16.0
+tenacity==8.0.1
