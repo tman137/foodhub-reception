@@ -1,0 +1,2 @@
+pygame==2.0.1
+python-statemachine==0.8.0
