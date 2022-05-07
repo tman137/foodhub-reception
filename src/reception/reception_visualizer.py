@@ -7,7 +7,7 @@ RED = (204, 0, 0)
 
 class ReceptionVisualizer:
     def __init__(self):
-        pygame.init()
+        pygame.display.init()
         pygame.mixer.init()
         pygame.font.init()
 
