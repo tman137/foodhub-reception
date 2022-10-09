@@ -24,9 +24,11 @@ The font Barlow has to be installed
 * If the member is not allowed to shop, the membership status will be shown as well
 * Afterwards the software will wait for another barcode
 
+### Setup script
+* Flash a standard raspbian image on your sd card 
+* enable ssh in raspbian
+* copy the initialize_pi.sh script to your raspberry
+* ssh to your raspberry and run ./initialize_pi.sh <odoo_url> <odoo_database> <odoo_email> <odoo_password>
+
 ### TODOs 
 * Throw an exception if barlow is not installed
-* Create raspberry setup script which
-    * installs "Barlow"
-    * puts the script into bashrc
-    * hides the cursor
