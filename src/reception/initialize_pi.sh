@@ -32,9 +32,9 @@ echo 'export PYTHONPATH="$PYTHONPATH:/home/pi/foodhub-reception"' >> .venv/bin/a
 pip install -r requirements_reception.txt
 
 #set start script on startup
-# echo 'cd foodhub-reception' >> ~/.bashrc
-# echo 'source .venv/bin/activate' >> ~/.bashrc
-# echo 'export DISPLAY=:0.0'
-# echo "python3 src/reception/reception.py \"$1\" \"$2\" \"$3\" \"$4\"" >> ~/.bashrc
+echo 'cd foodhub-reception' >> ~/.bashrc
+echo 'source .venv/bin/activate' >> ~/.bashrc
+echo 'export DISPLAY=:0.0' >> ~/.bashrc
+echo "python3 src/reception/reception.py \"$1\" \"$2\" \"$3\" \"$4\"" >> ~/.bashrc
 
-# sudo reboot now
+sudo reboot now
