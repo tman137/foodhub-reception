@@ -9,11 +9,16 @@ sudo apt install python3-sdl2 -y
 cd /home/pi
 
 #turn of screensaver
-sudo chmod +w /etc/lightdm/lightdm.conf
-echo '[SeatDefaults]' >> /etc/lightdm/lightdm.conf
-echo 'xserver-command=X -s 0 -dpms' >> /etc/lightdm/lightdm.conf
+sudo apt install x11-xserver-utils
+echo 'xset s off' >> /home/pi/.xinitrc
+echo 'xset -dpms' >> /home/pi/.xinitrc
+echo 'xset s noblank' >> /home/pi/.xinitrc
+echo 'exec /etc/alternatives/x-session-manager' >> /home/pi/.xinitrc
 #hide cursor
-echo 'xserver-command = X -nocursor' >> /etc/lightdm/lightdm.conf
+sudo apt install unclutter 
+mkdir -p /home/pi/.config/lxsession/LXDE-pi/
+touch /home/pi/.config/lxsession/LXDE-pi/autostart
+echo '@unclutter -idle 0' >> /home/pi/.config/lxsession/LXDE-pi/autostart
 
 #install barlow
 wget https://www.1001fonts.com/download/barlow.zip
