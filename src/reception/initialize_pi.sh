@@ -9,15 +9,20 @@ sudo apt install python3-sdl2 -y
 cd /home/pi
 
 #turn of screensaver
-sudo echo '[SeatDefaults]' >> sudo /etc/lightdm/lightdm.conf
-sudo echo 'xserver-command=X -s 0 -dpms' >> sudo /etc/lightdm/lightdm.conf
+sudo chmod +w /etc/lightdm/lightdm.conf
+echo '[SeatDefaults]' >> /etc/lightdm/lightdm.conf
+echo 'xserver-command=X -s 0 -dpms' >> /etc/lightdm/lightdm.conf
 #hide cursor
-sudo echo 'xserver-command = X -nocursor' >> sudo /etc/lightdm/lightdm.conf
+echo 'xserver-command = X -nocursor' >> /etc/lightdm/lightdm.conf
 
 #install barlow
 wget https://www.1001fonts.com/download/barlow.zip
 mkdir .fonts
 mv barlow.zip .fonts
+cd .fonts
+unzip barlow.zip
+find . ! -name Barlow-Bold.ttf -delete
+cd /home/pi 
 sudo fc-cache -f -v
 
 
