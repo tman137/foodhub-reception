@@ -10,6 +10,15 @@ class OdooData:
 
 
 class MemberRecord(OdooData):
+    def __init__(self, data):
+        super().__init__(self.find_working_member(data))
+
+    def find_working_member(self, data):
+        for member in data:
+            if member["eater"] == "worker_eater":
+                return [member]
+        return []
+
     def can_shop(self):
         return self.data[0]["can_shop"]
 
