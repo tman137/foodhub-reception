@@ -3,7 +3,7 @@ from src.odoo.odoo_arguments import parse_odoo_arguments
 import plotly.graph_objects as gp
 import numpy as np
 
-MAX_AGE = 90
+MAX_AGE = 95
 AGE_INTERVAL = 5
 
 
@@ -74,11 +74,30 @@ def CreatePlot(female_ages, male_ages, no_gender, no_age):
                 "75 - 79",
                 "80 - 84",
                 "85 - 89",
+                "90 - 95",
             ],
         ),
         xaxis=dict(
-            tickvals=[-80, -70, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40],
+            tickvals=[
+                -100,
+                -90,
+                -80,
+                -70,
+                -60,
+                -50,
+                -40,
+                -30,
+                -20,
+                -10,
+                0,
+                10,
+                20,
+                30,
+                40,
+            ],
             ticktext=[
+                "100",
+                "90",
                 "80",
                 "70",
                 "60",
