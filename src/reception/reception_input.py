@@ -7,7 +7,7 @@ class ReceptionInput:
 
     def poll_qr_code(self):
         result = None
-        event = pygame.event.wait(1000)
+        event = pygame.event.wait(100)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 result = self.code

@@ -11,17 +11,17 @@ class ReceptionVisualizer:
         pygame.mixer.init()
         pygame.font.init()
 
-        self.width = 1440
-        self.heigth = 900
+        self.width = 1920
+        self.heigth = 1080
         self.size = self.width, self.heigth
-        self.display = pygame.display.set_mode(self.size, flags=pygame.NOFRAME)
+        self.display = pygame.display.set_mode(self.size, flags=pygame.FULLSCREEN)
         self.background = pygame.image.load("res/background.png")
-        self.font = pygame.font.SysFont("Barlow", 80)
+        self.font = pygame.font.SysFont("Barlow", 100)
         self.alpha_start = 220
         self.alpha_step = -7
-        self.time_to_blink_color = 500
+        self.time_to_blink_color = 100
         self.red_reason = ""
-        self.second_line_offset = 80
+        self.second_line_offset = 100
 
     def set_red_reason(self, reason):
         self.red_reason = reason
@@ -58,17 +58,17 @@ class ReceptionVisualizer:
 
     def show_awaiting(self):
         self._draw_background()
-        self._draw_text("Warte auf Ausweis", (350, 350))
+        self._draw_text("Warte auf Ausweis", (450, 350))
         pygame.display.flip()
 
     def show_green(self):
         self._show_animation(
-            "res/green.wav", "Person ist einkaufsberechtigt", "", (200, 350), GREEN
+            "res/green.wav", "Person ist einkaufsberechtigt", "", (270, 350), GREEN
         )
 
     def show_wrong_barcode(self):
         self._show_animation(
-            "res/wrong_barcode.wav", "Code ist nicht im System!", "", (270, 350), RED
+            "res/wrong_barcode.wav", "Code ist nicht im System!", "", (350, 350), RED
         )
 
     def show_red(self):
@@ -76,6 +76,6 @@ class ReceptionVisualizer:
             "res/red.wav",
             "Einkaufsstatus nicht ok!",
             "Grund: {}".format(self.red_reason),
-            (270, 350),
+            (300, 350),
             RED,
         )
