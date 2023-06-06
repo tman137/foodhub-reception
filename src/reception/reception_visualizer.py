@@ -16,7 +16,7 @@ class ReceptionVisualizer:
         self.heigth = 1080
         self.size = self.width, self.heigth
         self.display = pygame.display.set_mode(self.size, flags=pygame.FULLSCREEN)
-        self.background = pygame.image.load("res/background.png")
+        self.background = pygame.image.load("res/background.png").convert()
         self.font = pygame.font.SysFont("Barlow", 100)
         self.alpha_start = 220
         self.alpha_step = -7
