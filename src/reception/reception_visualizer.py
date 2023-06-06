@@ -10,6 +10,7 @@ class ReceptionVisualizer:
         pygame.display.init()
         pygame.mixer.init()
         pygame.font.init()
+        pygame.mouse.set_visible(False)
 
         self.width = 1920
         self.heigth = 1080
