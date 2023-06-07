@@ -13,3 +13,11 @@ class ReceptionStateMachine(StateMachine):
     wrong_barcode_to_awaiting = wrong_barcode.to(awaiting)
     shopping_status_not_ok = awaiting.to(red)
     not_ok_to_awaiting = red.to(awaiting)
+
+    def on_enter_awaiting(self):
+        self.redraw_necessary = True
+
+    def is_redraw_necessary(self):
+        value = self.redraw_necessary
+        self.redraw_necessary = False
+        return value

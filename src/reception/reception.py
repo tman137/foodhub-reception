@@ -32,6 +32,9 @@ class Reception:
         if cooperative_status.valid():
             self.visualizer.set_red_reason(cooperative_status.get_status())
 
+    def _redraw_necessery(self):
+        return self.state_machine.is_redraw_necessary()
+
     def awaiting(self):
         qr_code = self.input.poll_qr_code()
         if qr_code:
@@ -45,7 +48,8 @@ class Reception:
                 self._set_red_reason_for_visulization(member_record)
                 self.state_machine.shopping_status_not_ok()
             return
-        self.visualizer.show_awaiting()
+        if self._redraw_necessery():
+            self.visualizer.show_awaiting()
 
     def green(self):
         self.visualizer.show_green()

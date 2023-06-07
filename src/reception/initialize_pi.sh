@@ -14,11 +14,6 @@ echo 'xset s off' >> /home/foodhub/.xinitrc
 echo 'xset -dpms' >> /home/foodhub/.xinitrc
 echo 'xset s noblank' >> /home/foodhub/.xinitrc
 echo 'exec /etc/alternatives/x-session-manager' >> /home/foodhub/.xinitrc
-#hide cursor
-sudo apt install unclutter 
-mkdir -p /home/foodhub/.config/lxsession/LXDE-pi/
-touch /home/foodhub/.config/lxsession/LXDE-pi/autostart
-echo '@unclutter -idle 0' >> /home/foodhub/.config/lxsession/LXDE-pi/autostart
 
 #install barlow
 wget https://www.1001fonts.com/download/barlow.zip
@@ -29,7 +24,6 @@ unzip barlow.zip
 find . ! -name Barlow-Bold.ttf -delete
 cd /home/foodhub 
 sudo fc-cache -f -v
-
 
 #clone repo
 git clone https://github.com/tman137/foodhub-reception.git
