@@ -1,4 +1,5 @@
 import pygame
+import datetime
 
 BLACK = (0, 0, 0)
 GREEN = (0, 153, 0)
@@ -18,6 +19,7 @@ class ReceptionVisualizer:
         self.display = pygame.display.set_mode(self.size, flags=pygame.FULLSCREEN)
         self.background = pygame.image.load("res/background.png").convert()
         self.font = pygame.font.SysFont("Barlow", 100)
+        self.clock_font = pygame.font.SysFont("Barlow", 60)
         self.alpha_start = 220
         self.alpha_step = -7
         self.time_to_blink_color = 100
@@ -27,8 +29,18 @@ class ReceptionVisualizer:
     def set_red_reason(self, reason):
         self.red_reason = reason
 
+    def _draw_time(self):
+        time = datetime.datetime.now().time()
+        text = self.clock_font.render(
+            "{hours:02}:{minutes:02}".format(hours=time.hour, minutes=time.minute),
+            True,
+            BLACK,
+        )
+        self.display.blit(text, (50, 30))
+
     def _draw_background(self):
         self.display.blit(self.background, (0, 0))
+        self._draw_time()
 
     def _draw_rectangle(self, alpha, color):
         green_rectangle = pygame.Surface((self.width, self.heigth))

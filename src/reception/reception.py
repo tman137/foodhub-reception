@@ -1,4 +1,5 @@
 import pygame
+import datetime
 from reception_state_machine import ReceptionStateMachine
 from reception_visualizer import ReceptionVisualizer
 from reception_input import ReceptionInput
@@ -21,6 +22,7 @@ class Reception:
             "Wrong barcode": self.wrong_barcode,
             "Red": self.red,
         }
+        self.previous_minute = datetime.datetime.now().minute
 
     def _parse_arguments(self):
         return parse_odoo_arguments()
@@ -32,8 +34,14 @@ class Reception:
         if cooperative_status.valid():
             self.visualizer.set_red_reason(cooperative_status.get_status())
 
+    def _new_minute(self):
+        current_minute = datetime.datetime.now().minute
+        result = current_minute != self.previous_minute
+        self.previous_minute = current_minute
+        return result
+
     def _redraw_necessery(self):
-        return self.state_machine.is_redraw_necessary()
+        return self._new_minute() or self.state_machine.is_redraw_necessary()
 
     def awaiting(self):
         qr_code = self.input.poll_qr_code()
