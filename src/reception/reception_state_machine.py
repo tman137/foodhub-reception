@@ -2,6 +2,8 @@ from statemachine import StateMachine, State
 
 
 class ReceptionStateMachine(StateMachine):
+    redraw_necessary = True
+
     awaiting = State("Awaiting", initial=True)
     green = State("Green")
     wrong_barcode = State("Wrong barcode")
