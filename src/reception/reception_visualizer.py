@@ -74,6 +74,11 @@ class ReceptionVisualizer:
         self._draw_text("Warte auf Ausweis", (450, 350))
         pygame.display.flip()
 
+    def show_no_internet_connection(self):
+        self._show_animation(
+            "res/wrong_barcode.wav", "Keine Internetverbindung", "", (350, 350), RED
+        )
+
     def show_green(self):
         self._show_animation(
             "res/green.wav", "Person ist einkaufsberechtigt", "", (270, 350), GREEN

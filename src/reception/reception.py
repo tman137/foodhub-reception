@@ -20,6 +20,7 @@ class Reception:
             "Awaiting": self.awaiting,
             "Green": self.green,
             "Wrong barcode": self.wrong_barcode,
+            "No Connection": self.no_connection,
             "Red": self.red,
         }
         self.previous_minute = datetime.datetime.now().minute
@@ -46,7 +47,11 @@ class Reception:
     def awaiting(self):
         qr_code = self.input.poll_qr_code()
         if qr_code:
-            member_record = self.odoo_connector.get_member(qr_code)
+            try:
+                member_record = self.odoo_connector.get_member(qr_code)
+            except:
+                self.state_machine.awaiting_to_no_connection()
+                return
             if not member_record.valid():
                 self.state_machine.member_card_not_found()
                 return
@@ -66,6 +71,10 @@ class Reception:
     def wrong_barcode(self):
         self.visualizer.show_wrong_barcode()
         self.state_machine.wrong_barcode_to_awaiting()
+
+    def no_connection(self):
+        self.visualizer.show_no_internet_connection()
+        self.state_machine.no_connection_to_awaiting()
 
     def red(self):
         self.visualizer.show_red()
