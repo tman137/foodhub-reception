@@ -18,7 +18,8 @@ class ReceptionVisualizer:
         self.size = self.width, self.heigth
         self.display = pygame.display.set_mode(self.size, flags=pygame.FULLSCREEN)
         self.background = pygame.image.load("res/background.png").convert()
-        self.font = pygame.font.SysFont("Barlow", 100)
+        self.default_font = pygame.font.SysFont("Barlow", 100)
+        self.font = self.default_font
         self.clock_font = pygame.font.SysFont("Barlow", 60)
         self.alpha_start = 220
         self.alpha_step = -7
@@ -48,9 +49,12 @@ class ReceptionVisualizer:
         green_rectangle.fill(color)
         self.display.blit(green_rectangle, (0, 0))
 
-    def _draw_text(self, text, start_point):
+    def _draw_text(self, text, start_point, font=None):
+        if font:
+            self.font = font
         text = self.font.render(text, True, BLACK)
         self.display.blit(text, (start_point))
+        self.font = self.default_font
 
     def _draw(self, alpha, text, text_second_line, start_point, color):
         self._draw_background()
@@ -72,6 +76,11 @@ class ReceptionVisualizer:
     def show_awaiting(self):
         self._draw_background()
         self._draw_text("Warte auf Ausweis", (450, 350))
+        self._draw_text(
+            "F1 drücken, um den Mitgliedernamen manuell einzugeben",
+            (50, 1030),
+            pygame.font.SysFont("Barlow", 30),
+        )
         pygame.display.flip()
 
     def show_no_internet_connection(self):
@@ -95,5 +104,25 @@ class ReceptionVisualizer:
             "Einkaufsstatus nicht ok!",
             "Grund: {}".format(self.red_reason),
             (300, 350),
+            RED,
+        )
+
+    def show_manual_input(self, member_name):
+        self._draw_background()
+        self._draw_text("Namen eingeben:", (400, 350))
+        self._draw_text(member_name, (400, 450))
+        self._draw_text(
+            "ESC drücken, um zurück zum Scannen zu gehen",
+            (50, 1030),
+            pygame.font.SysFont("Barlow", 30),
+        )
+        pygame.display.flip()
+
+    def show_member_not_found(self):
+        self._show_animation(
+            "res/wrong_barcode.wav",
+            "Mitglied nicht gefunden!",
+            "",
+            (350, 350),
             RED,
         )

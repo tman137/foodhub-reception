@@ -76,6 +76,25 @@ class OdooConnector:
             models.execute_kw(self.db, uid, self.password, "res.partner", "read", [ids])
         )
 
+    def get_member_from_name(self, name):
+        uid = self._get_uid()
+        models = self._get_models()
+        try:
+            ids = models.execute_kw(
+                self.db,
+                uid,
+                self.password,
+                "res.partner",
+                "search",
+                [[["name", "=", name]]],
+            )
+        except:
+            return MemberRecord(None)
+
+        return MemberRecord(
+            models.execute_kw(self.db, uid, self.password, "res.partner", "read", [ids])
+        )
+
     def get_cooperative_status(self, ids):
         uid = self._get_uid()
         models = self._get_models()
