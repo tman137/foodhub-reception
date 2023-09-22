@@ -76,6 +76,9 @@ class OdooConnector:
             models.execute_kw(self.db, uid, self.password, "res.partner", "read", [ids])
         )
 
+    def _is_eater(self, data):
+        return len(data) == 1 and data[0]["eater"] == "eater"
+
     def get_member_from_name(self, name):
         uid = self._get_uid()
         models = self._get_models()
@@ -91,9 +94,15 @@ class OdooConnector:
         except:
             return MemberRecord(None)
 
-        return MemberRecord(
-            models.execute_kw(self.db, uid, self.password, "res.partner", "read", [ids])
+        data = models.execute_kw(
+            self.db, uid, self.password, "res.partner", "read", [ids]
         )
+        if self._is_eater(data):
+            parent_eater_id = data[0]["parent_eater_id"][0]
+            data = models.execute_kw(
+                self.db, uid, self.password, "res.partner", "read", [parent_eater_id]
+            )
+        return MemberRecord(data)
 
     def get_cooperative_status(self, ids):
         uid = self._get_uid()
