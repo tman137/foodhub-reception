@@ -98,6 +98,24 @@ class ReceptionVisualizer:
             "res/wrong_barcode.wav", "Code ist nicht im System!", "", (350, 350), RED
         )
 
+    def show_cooperator_candidate(self):
+        self._show_animation(
+            "res/green.wav",
+            "Mitgliedskandidat*in!",
+            "Zahlungseingang nicht bestätigt",
+            (300, 350),
+            GREEN,
+        )
+
+    def show_working_mode_not_set(self):
+        self._show_animation(
+            "res/green.wav",
+            "Bitte Arbeitsmodell mit dem ",
+            "Mitgliederbüro auswählen",
+            (270, 350),
+            GREEN,
+        )
+
     def show_red(self):
         self._show_animation(
             "res/red.wav",

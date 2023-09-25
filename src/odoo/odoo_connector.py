@@ -19,6 +19,12 @@ class MemberRecord(OdooData):
                 return [member]
         return []
 
+    def is_cooperator_candiate(self):
+        return self.data[0]["coop_candidate"]
+
+    def working_mode_set(self):
+        return self.data[0]["working_mode"] is not False
+
     def can_shop(self):
         return self.data[0]["can_shop"]
 

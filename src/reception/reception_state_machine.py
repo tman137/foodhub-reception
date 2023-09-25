@@ -11,6 +11,8 @@ class ReceptionStateMachine(StateMachine):
     no_connection = State("No Connection")
     red = State("Red")
     member_not_found = State("Member not found")
+    cooperator_candidate = State("Payment not received")
+    working_mode_not_set = State("Working mode not set")
 
     awaiting_to_shopping_status_ok = awaiting.to(green)
     ok_to_awaiting = green.to(awaiting)
@@ -26,7 +28,11 @@ class ReceptionStateMachine(StateMachine):
     manual_input_to_awaiting = manual_input.to(awaiting)
     manual_input_to_no_connection = manual_input.to(no_connection)
     manual_input_to_member_not_found = manual_input.to(member_not_found)
+    manual_input_to_cooperator_candidate = manual_input.to(cooperator_candidate)
+    manual_input_to_working_mode_not_set = manual_input.to(working_mode_not_set)
     member_not_found_to_manual_input = member_not_found.to(manual_input)
+    cooperator_candidate_to_awaiting = cooperator_candidate.to(awaiting)
+    working_mode_not_set_to_awaiting = working_mode_not_set.to(awaiting)
 
     def on_enter_awaiting(self):
         self.redraw_necessary = True

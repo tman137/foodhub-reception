@@ -25,6 +25,8 @@ class Reception:
             "Manual Input": self.manual_input,
             "Member not found": self.member_not_found,
             "Red": self.red,
+            "Payment not received": self.cooperator_candidate,
+            "Working mode not set": self.working_mode_not_set,
         }
         self.previous_minute = datetime.datetime.now().minute
         self.member_name = ""
@@ -62,6 +64,9 @@ class Reception:
                     return
                 if not member_record.valid():
                     self.state_machine.awaiting_to_wrong_barcode()
+                    return
+                if not member_record.working_mode_set():
+                    self.state_machine.manual_input_to_working_mode_not_set()
                     return
                 if member_record.can_shop():
                     self.state_machine.awaiting_to_shopping_status_ok()
@@ -108,6 +113,12 @@ class Reception:
             if not member_record.valid():
                 self.state_machine.manual_input_to_member_not_found()
                 return
+            if member_record.is_cooperator_candiate():
+                self.state_machine.manual_input_to_cooperator_candidate()
+                return
+            if not member_record.working_mode_set():
+                self.state_machine.manual_input_to_working_mode_not_set()
+                return
             if member_record.can_shop():
                 self.state_machine.manual_input_to_green()
                 return
@@ -131,6 +142,14 @@ class Reception:
     def red(self):
         self.visualizer.show_red()
         self.state_machine.not_ok_to_awaiting()
+
+    def cooperator_candidate(self):
+        self.visualizer.show_cooperator_candidate()
+        self.state_machine.cooperator_candidate_to_awaiting()
+
+    def working_mode_not_set(self):
+        self.visualizer.show_working_mode_not_set()
+        self.state_machine.working_mode_not_set_to_awaiting()
 
     def loop(self):
         self.state_mapping[self.state_machine.current_state.name]()
