@@ -51,7 +51,7 @@ class Reception:
         return self._new_minute() or self.state_machine.is_redraw_necessary()
 
     def awaiting(self):
-        input = self.input.poll_input()
+        input = self.input.poll_qr_code()
         if input:
             if input == "[F1]":
                 self.state_machine.awaiting_to_manual_input()
