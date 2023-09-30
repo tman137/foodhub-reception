@@ -127,7 +127,7 @@ class ReceptionVisualizer:
 
     def show_manual_input(self, member_name):
         self._draw_background()
-        self._draw_text("Namen eingeben:", (400, 350))
+        self._draw_text("Vorname Nachname eingeben:", (250, 350))
         self._draw_text(member_name, (400, 450))
         self._draw_text(
             "ESC drücken, um zurück zum Scannen zu gehen",
