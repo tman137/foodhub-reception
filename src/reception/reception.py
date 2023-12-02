@@ -66,7 +66,7 @@ class Reception:
                     self.state_machine.awaiting_to_wrong_barcode()
                     return
                 if not member_record.working_mode_set():
-                    self.state_machine.manual_input_to_working_mode_not_set()
+                    self.state_machine.awaiting_to_working_mode_not_set()
                     return
                 if member_record.can_shop():
                     self.state_machine.awaiting_to_shopping_status_ok()

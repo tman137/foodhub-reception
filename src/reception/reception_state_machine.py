@@ -22,6 +22,7 @@ class ReceptionStateMachine(StateMachine):
     not_ok_to_awaiting = red.to(awaiting)
     awaiting_to_no_connection = awaiting.to(no_connection)
     no_connection_to_awaiting = no_connection.to(awaiting)
+    awaiting_to_working_mode_not_set = awaiting.to(working_mode_not_set)
     awaiting_to_manual_input = awaiting.to(manual_input)
     manual_input_to_green = manual_input.to(green)
     manual_input_to_red = manual_input.to(red)
